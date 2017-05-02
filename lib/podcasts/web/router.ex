@@ -1,12 +1,30 @@
 defmodule Podcasts.Web.Router do
   use Podcasts.Web, :router
 
+  @doc """
+  General purpose pipeline for HTML requests.
+  """
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.LoadResource
+  end
+
+  @doc """
+  Plug pipeline the protects the routes in the scope with authentication. In
+  other words, only authenticated users can access the routes in the scope where
+  this pipeline is.
+
+  Current authenticated user can be access with `Adlicious.Web.ViewHelpers.current_user/1`.
+  """
+  pipeline :browser_auth do
+    plug Guardian.Plug.VerifySession
+    plug Guardian.Plug.EnsureAuthenticated, handler: Adlicious.Web.Auth.Token
+    plug Guardian.Plug.LoadResource
   end
 
   pipeline :api do
@@ -18,6 +36,12 @@ defmodule Podcasts.Web.Router do
 
     get "/", PageController, :index
     post "/podcast", PageController, :podcast_information
+
+    get "/login", AuthController, :new
+    post "/login", AuthController, :create
+    delete "/logout", AuthController, :delete
+    
+    resources "/users", UserController, only: [:new, :create]
   end
 
   # Other scopes may use custom stacks.

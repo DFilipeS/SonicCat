@@ -16,6 +16,13 @@
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
 
+      <%= if logged_in?(@conn) do %>
+        <span class="navbar-text" style="margin-top: 1px;"><strong><%= current_user(@conn).email %></strong></span>
+        <%= link gettext("Sign out"), to: auth_path(@conn, :delete), method: :delete, class: "nav-link" %>
+      <% else %>
+        <%= link gettext("Sign in"), to: auth_path(@conn, :new), class: "nav-link" %>
+      <% end %>
+
       <main role="main">
         <%= render @view_module, @view_template, assigns %>
       </main>

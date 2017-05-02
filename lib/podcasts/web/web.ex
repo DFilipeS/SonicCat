@@ -39,6 +39,7 @@ defmodule Podcasts.Web do
       import Podcasts.Web.Router.Helpers
       import Podcasts.Web.ErrorHelpers
       import Podcasts.Web.Gettext
+      import Podcasts.Web.ViewHelpers
     end
   end
 
