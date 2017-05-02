@@ -6,6 +6,12 @@ export default class View extends MainView {
 
     // Specific logic here
     console.log('PageIndexView mounted');
+
+    // $.post('/api/podcast', {url: 'http://feeds.feedburner.com/rc-as-baladas-de-dr-paixao'}, function (data) {
+    //   console.log('data', data);
+    // });
+
+    require('./podcast');
   }
 
   unmount() {

@@ -17,10 +17,13 @@ defmodule Podcasts.Web.Router do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
+    post "/podcast", PageController, :podcast_information
   end
 
   # Other scopes may use custom stacks.
-  # scope "/api", Podcasts.Web do
-  #   pipe_through :api
-  # end
+  scope "/api", Podcasts.Web do
+    pipe_through :api
+
+    post "/podcast", PageController, :podcast_information_api
+  end
 end
