@@ -19,11 +19,11 @@ defmodule Podcasts.Web.Router do
   other words, only authenticated users can access the routes in the scope where
   this pipeline is.
 
-  Current authenticated user can be access with `Adlicious.Web.ViewHelpers.current_user/1`.
+  Current authenticated user can be access with `Podcasts.Web.ViewHelpers.current_user/1`.
   """
   pipeline :browser_auth do
     plug Guardian.Plug.VerifySession
-    plug Guardian.Plug.EnsureAuthenticated, handler: Adlicious.Web.Auth.Token
+    plug Guardian.Plug.EnsureAuthenticated, handler: Podcasts.Web.Auth.Token
     plug Guardian.Plug.LoadResource
   end
 
@@ -40,8 +40,14 @@ defmodule Podcasts.Web.Router do
     get "/login", AuthController, :new
     post "/login", AuthController, :create
     delete "/logout", AuthController, :delete
-    
+
     resources "/users", UserController, only: [:new, :create]
+  end
+
+  scope "/", Podcasts.Web do
+    pipe_through [:browser, :browser_auth]
+
+    resources "/feeds", FeedController, only: [:index, :show, :new, :create]
   end
 
   # Other scopes may use custom stacks.
@@ -49,5 +55,6 @@ defmodule Podcasts.Web.Router do
     pipe_through :api
 
     post "/podcast", PageController, :podcast_information_api
+    get "/feeds/:id", FeedApiController, :show
   end
 end

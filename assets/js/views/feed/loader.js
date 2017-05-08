@@ -1,23 +1,23 @@
-import MainView from './main';
+import MainView from '../main';
 
 export default class View extends MainView {
   mount() {
     super.mount();
 
     // Specific logic here
-    console.log('PageIndexView mounted');
+    console.log('FeedShowView mounted');
 
     // $.post('/api/podcast', {url: 'http://feeds.feedburner.com/rc-as-baladas-de-dr-paixao'}, function (data) {
     //   console.log('data', data);
     // });
 
-    // require('./podcast');
+    require('./index');
   }
 
   unmount() {
     super.unmount();
 
     // Specific logic here
-    console.log('PageIndexView unmounted');
+    console.log('FeedShowView unmounted');
   }
 }

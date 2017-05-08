@@ -2,10 +2,9 @@ defmodule Podcasts.Accounts do
   @moduledoc """
   The boundary for the Accounts system.
   """
-
   import Ecto.{Query, Changeset}, warn: false
-  alias Podcasts.Repo
 
+  alias Podcasts.Repo
   alias Podcasts.Accounts.User
 
   @doc """

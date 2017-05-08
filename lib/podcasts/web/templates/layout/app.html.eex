@@ -18,6 +18,7 @@
 
       <%= if logged_in?(@conn) do %>
         <span class="navbar-text" style="margin-top: 1px;"><strong><%= current_user(@conn).email %></strong></span>
+        <%= link gettext("Feeds"), to: feed_path(@conn, :index), class: "nav-link" %>
         <%= link gettext("Sign out"), to: auth_path(@conn, :delete), method: :delete, class: "nav-link" %>
       <% else %>
         <%= link gettext("Sign in"), to: auth_path(@conn, :new), class: "nav-link" %>

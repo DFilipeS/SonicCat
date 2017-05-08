@@ -1,0 +1,12 @@
+<h1>New feed</h1>
+
+<% IO.inspect(@changeset) %>
+
+<%= form_for @changeset, feed_path(@conn, :create), fn f -> %>
+  <div class="form-group <%= if f.errors[:url] do %>has-danger<% end %>">
+    <%= text_input f, :url, placeholder: gettext("URL"), class: "form-control" %>
+    <div class="form-control-feedback"><%= error_tag f, :url %></div>
+  </div>
+
+  <%= submit gettext("Add"), class: "btn btn-primary btn-block" %>
+<% end %>

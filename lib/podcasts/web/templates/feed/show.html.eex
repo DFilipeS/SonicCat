@@ -1,0 +1,9 @@
+<h3><%= @feed.name %></h3>
+<h4><%= @feed.author %></h4>
+<small className="text-muted"><%= @feed.description %></small>
+
+<div id="js-react-feed"></div>
+
+<script type="text/javascript">
+  var feedId = <%= @feed.id %>;
+</script>
