@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import { Howl } from 'howler';
+import 'moment-duration-format';
 import moment from 'moment';
 
 class PodcastView extends Component {
@@ -11,7 +12,9 @@ class PodcastView extends Component {
       feed: null,
       state: 'stopped',
       currentlyPlaying: null,
-      currentEntry: null
+      currentEntry: null,
+      currentTime: 0,
+      duration: 0
     };
   }
 
@@ -33,21 +36,25 @@ class PodcastView extends Component {
       html5: true
     });
 
-    // this.player.once('load', () => {
-    //   console.log('duration', this.player.duration());
-    // });
-    //
-    // this.player.on('play', () => {
-    //   console.log('play');
-    // });
-    //
-    // this.player.on('pause', () => {
-    //   console.log('pause');
-    // });
-    //
-    // this.player.on('stop', () => {
-    //   console.log('stop');
-    // });
+    this.player.once('load', () => {
+      console.log('duration', this.player.duration());
+      this.setState({ duration: this.player.duration() });
+    });
+
+    this.player.on('play', () => {
+      console.log('play');
+      this.timer = setInterval(() => { this.setState({ currentTime: this.state.currentTime + 1 }); }, 1000);
+    });
+
+    this.player.on('pause', () => {
+      console.log('pause');
+      window.clearTimeout(this.timer);
+    });
+
+    this.player.on('stop', () => {
+      console.log('stop');
+      this.setState({ currentTime: 0 });
+    });
 
     this.setState({ state: 'playing', currentlyPlaying: this.player.play(), currentEntry: entry });
   }
@@ -88,6 +95,7 @@ class PodcastView extends Component {
             this.state.currentlyPlaying != null ?
               <div style={{margin: "20px 0"}}>
                 <p><strong>{this.state.currentEntry.title}</strong></p>
+                { this.state.duration > 0 ? <p>{moment.duration(this.state.currentTime, "seconds").format("hh:mm:ss", { trim: false })} - {moment.duration(this.state.duration, "seconds").format("hh:mm:ss", { trim: false })}</p> : null}
                 <div className="btn-group">
                   {
                     this.state.state == 'playing' ?

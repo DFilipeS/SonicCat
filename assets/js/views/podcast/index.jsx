@@ -12,7 +12,6 @@ class PodcastView extends Component {
 
   componentWillMount() {
     axios.post('/api/podcast', {url: 'http://feeds.feedburner.com/rc-as-baladas-de-dr-paixao'}).then((data) => {
-      console.log('data', data);
       this.setState({
         feeds: data.data.feed
       });
