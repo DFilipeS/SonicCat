@@ -14,7 +14,8 @@ class PodcastView extends Component {
       currentlyPlaying: null,
       currentEntry: null,
       currentTime: 0,
-      duration: 0
+      duration: 0,
+      volume: 1.0
     };
   }
 
@@ -33,7 +34,8 @@ class PodcastView extends Component {
 
     this.player = new Howl({
       src: [entry.url],
-      html5: true
+      html5: true,
+      volume: this.state.volume
     });
 
     this.player.once('load', () => {
@@ -74,6 +76,11 @@ class PodcastView extends Component {
     this.setState({ state: 'stopped', currentlyPlaying: null, currentEntry: null });
   }
 
+  onVolumeChange = (e) => {
+    this.setState({ volume: e.target.value });
+    this.player.volume(e.target.value);
+  }
+
   renderEntries = () => {
     if (!this.state.feed) return null;
     return this.state.feed.entries.map((entry, index) => {
@@ -104,6 +111,9 @@ class PodcastView extends Component {
                       <button className="btn btn-primary btn-sm" type="button" onClick={() => { this.resume(this.state.currentlyPlaying); }} disabled={this.state.currentlyPlaying == null}>Play</button>
                   }
                   <button className="btn btn-primary btn-sm" type="button" onClick={() => { this.stop(); }} disabled={this.state.currentlyPlaying == null}>Stop</button>
+                </div>
+                <div style={{margin: "20px 0"}}>
+                  <input onChange={this.onVolumeChange} type="range" min={0} max={1} step={0.01} value={this.state.volume}/>
                 </div>
               </div> : null
           }
