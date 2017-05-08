@@ -19,17 +19,19 @@ defmodule Podcasts.Web.FeedApiController do
         entries: [
           ~x"//rss/channel/item"l,
           title: ~x"./title/text()"s,
-          url: ~x"./link/text()"s,
+          url: ~x"./guid/text()"s,
           date: ~x"./pubDate/text()"s,
         ]
       )
       |> Enum.reduce(%{}, fn({key, val}, acc) -> Map.put(acc, Atom.to_string(key), val) end)
 
     feed = Map.put(feed, "entries", Enum.map(Map.get(feed, "entries"), fn (entry) ->
-      {:ok, date} = Timex.parse(Map.get(entry, :date), "{RFC1123}")
-      Map.put(entry, "date", date)
+      case Timex.parse(Map.get(entry, :date), "{RFC1123}") do
+        {:ok, date} -> Map.put(entry, "date", date)
+        {:error, _} -> Map.put(entry, "date", Timex.parse!(Map.get(entry, :date), "%a, %d %b %Y %k:%M:%S %z", :strftime))
+      end
     end))
-    
+
     render conn, "show.json", feed: feed
   end
 end
