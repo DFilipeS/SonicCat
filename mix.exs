@@ -39,7 +39,8 @@ defmodule Podcasts.Mixfile do
      {:httpoison, "~> 0.11.1"},
      {:guardian, "~> 0.14"},
      {:comeonin, "~> 3.0"},
-     {:sweet_xml, "~> 0.6"}]
+     {:sweet_xml, "~> 0.6"},
+     {:timex, "~> 3.1"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
