@@ -29,7 +29,7 @@ class PodcastView extends Component {
 
   playEntry = (entry) => {
     if (this.player) {
-      this.player.stop();
+      this.player.stop().unload();
     }
 
     this.player = new Howl({
@@ -55,7 +55,7 @@ class PodcastView extends Component {
 
     this.player.on('stop', () => {
       console.log('stop');
-      this.setState({ currentTime: 0 });
+      window.clearTimeout(this.timer);
     });
 
     this.setState({ state: 'playing', currentlyPlaying: this.player.play(), currentEntry: entry });
@@ -81,6 +81,11 @@ class PodcastView extends Component {
     this.player.volume(e.target.value);
   }
 
+  onSeek = (e) => {
+    this.setState({ currentTime: parseInt(e.target.value) });
+    this.player.seek(e.target.value);
+  }
+
   renderEntries = () => {
     if (!this.state.feed) return null;
     return this.state.feed.entries.map((entry, index) => {
@@ -102,7 +107,15 @@ class PodcastView extends Component {
             this.state.currentlyPlaying != null ?
               <div style={{margin: "20px 0"}}>
                 <p><strong>{this.state.currentEntry.title}</strong></p>
-                { this.state.duration > 0 ? <p>{moment.duration(this.state.currentTime, "seconds").format("hh:mm:ss", { trim: false })} - {moment.duration(this.state.duration, "seconds").format("hh:mm:ss", { trim: false })}</p> : null}
+                {
+                  this.state.duration > 0 ?
+                    <div>
+                      <input onChange={this.onSeek} type="range" min={0} max={this.state.duration} step={1} value={this.state.currentTime}/>
+                      <p>{moment.duration(this.state.currentTime, "seconds").format("hh:mm:ss", { trim: false })} - {moment.duration(this.state.duration, "seconds").format("hh:mm:ss", { trim: false })}</p>
+                    </div>
+                    :
+                    null
+                  }
                 <div className="btn-group">
                   {
                     this.state.state == 'playing' ?
