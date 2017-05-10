@@ -78,6 +78,26 @@ class PodcastView extends Component {
     this.setState({ state: 'stopped', currentlyPlaying: null, currentEntry: null });
   }
 
+  goBack15 = () => {
+    if (this.state.currentTime >= 15) {
+      this.setState({ currentTime: this.state.currentTime - 15 });
+      this.player.seek(this.state.currentTime - 15);
+    } else {
+      this.setState({ currentTime: 0 });
+      this.player.seek(0);
+    }
+  }
+
+  goForward15 = () => {
+    if (this.state.currentTime <= this.state.duration - 15) {
+      this.setState({ currentTime: this.state.currentTime + 15 });
+      this.player.seek(this.state.currentTime + 15);
+    } else {
+      this.setState({ currentTime: this.state.duration });
+      this.player.seek(this.state.duration);
+    }
+  }
+
   onVolumeChange = (e) => {
     this.setState({ volume: e.target.value });
     this.player.volume(e.target.value);
@@ -119,6 +139,7 @@ class PodcastView extends Component {
                     null
                   }
                 <div className="btn-group">
+                  <button className="btn btn-primary btn-sm" type="button" onClick={() => { this.goBack15(); }} disabled={this.state.currentlyPlaying == null}>Go back 15</button>
                   {
                     this.state.state == 'playing' ?
                       <button className="btn btn-primary btn-sm" type="button" onClick={() => { this.pause(); }}>Pause</button>
@@ -126,6 +147,7 @@ class PodcastView extends Component {
                       <button className="btn btn-primary btn-sm" type="button" onClick={() => { this.resume(this.state.currentlyPlaying); }} disabled={this.state.currentlyPlaying == null}>Play</button>
                   }
                   <button className="btn btn-primary btn-sm" type="button" onClick={() => { this.stop(); }} disabled={this.state.currentlyPlaying == null}>Stop</button>
+                  <button className="btn btn-primary btn-sm" type="button" onClick={() => { this.goForward15(); }} disabled={this.state.currentlyPlaying == null}>Go forward 15</button>
                 </div>
                 <div style={{margin: "20px 0"}}>
                   <input onChange={this.onVolumeChange} type="range" min={0} max={1} step={0.01} value={this.state.volume}/>
