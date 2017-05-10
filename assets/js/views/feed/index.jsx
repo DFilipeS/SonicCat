@@ -43,9 +43,10 @@ class PodcastView extends Component {
       this.setState({ duration: this.player.duration() });
     });
 
-    this.player.on('play', () => {
+    this.player.on('play', (id) => {
       console.log('play');
       this.timer = setInterval(() => { this.setState({ currentTime: this.state.currentTime + 1 }); }, 1000);
+      this.setState({ state: 'playing', currentlyPlaying: id, currentEntry: entry });
     });
 
     this.player.on('pause', () => {
@@ -56,9 +57,10 @@ class PodcastView extends Component {
     this.player.on('stop', () => {
       console.log('stop');
       window.clearTimeout(this.timer);
+      this.setState({ currentlyPlaying: null, state: 'stopped', duration: 0, currentTime: 0 });
     });
 
-    this.setState({ state: 'playing', currentlyPlaying: this.player.play(), currentEntry: entry });
+    this.player.play();
   }
 
   resume = () => {
