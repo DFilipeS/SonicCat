@@ -10,7 +10,6 @@ pipeline {
     stage('build') {
       steps {
         sh '''mix local.hex --force
-mix local.rebar --force
 mix deps.get'''
         sh '''cd assets
 npm install'''
