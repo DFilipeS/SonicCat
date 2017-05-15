@@ -1,8 +1,7 @@
 pipeline {
   agent {
-    docker {
-      image 'elixir'
-      args '-u root'
+    dockerfile {
+      filename 'docker/ci/Dockerfile'
     }
     
   }
