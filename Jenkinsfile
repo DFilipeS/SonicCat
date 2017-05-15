@@ -1,9 +1,15 @@
 pipeline {
-  agent any
+  agent {
+    docker {
+      image 'elixir'
+    }
+    
+  }
   stages {
     stage('build') {
       steps {
         echo 'Hello!'
+        sh 'mix deps.get'
       }
     }
     stage('cenas') {
