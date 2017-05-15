@@ -9,7 +9,8 @@ pipeline {
     stage('build') {
       steps {
         echo 'Hello!'
-        sh 'mix deps.get --force'
+        sh '''mix local.hex --force
+mix deps.get'''
       }
     }
     stage('cenas') {
