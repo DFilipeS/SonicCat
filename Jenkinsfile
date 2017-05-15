@@ -2,8 +2,9 @@ pipeline {
   agent {
     dockerfile {
       filename 'docker/ci/Dockerfile'
+      args '-u root'
     }
-    
+
   }
   stages {
     stage('build') {
