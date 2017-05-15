@@ -2,7 +2,7 @@ pipeline {
   agent {
     dockerfile {
       filename 'docker/ci/Dockerfile'
-      args '-u root'
+      args '-u root --link postgres:postgres'
     }
 
   }
@@ -10,6 +10,7 @@ pipeline {
     stage('build') {
       steps {
         sh '''mix local.hex --force
+mix local.rebar --force
 mix deps.get'''
         sh '''cd assets
 npm install'''
