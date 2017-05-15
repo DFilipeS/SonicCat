@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        sh 'mix deps.get'
+        sh 'mix deps.get --force'
         sh '''cd assets
 npm install'''
       }
