@@ -9,7 +9,7 @@ pipeline {
     stage('build') {
       steps {
         echo 'Hello!'
-        sh 'mix deps.get'
+        sh 'mix deps.get -y'
       }
     }
     stage('cenas') {
