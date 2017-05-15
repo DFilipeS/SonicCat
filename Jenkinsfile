@@ -9,16 +9,24 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        echo 'Hello!'
-        sh '''whoami
+        parallel(
+          "build": {
+            echo 'Hello!'
+            sh '''whoami
 mix local.hex --force
 mix deps.get'''
+            
+          },
+          "test": {
+            echo 'sadsadsad'
+            
+          }
+        )
       }
     }
-    stage('cenas') {
+    stage('deploy') {
       steps {
-        input 'sdsfsdfsdf'
-        echo 'GO'
+        input 'asdasdasd'
       }
     }
   }
