@@ -1,14 +1,17 @@
 <h1>My Feeds</h1>
 
 <%= for feed <- @feeds do %>
-  <a href="<%= feed_path(@conn, :show, feed) %>">
-    <div class="panel panel-default">
-      <div class="panel-body">
-        <h4><%= feed.name %></h4>
-        <h5><%= feed.author %></h5>
+  <div class="feed-entry">
+    <a href="<%= feed_path(@conn, :show, feed) %>">
+      <div class="panel panel-default">
+        <div class="panel-body">
+          <h4><%= feed.name %></h4>
+          <h5><%= feed.author %></h5>
+        </div>
       </div>
-    </div>
-  </a>
+    </a>
+    <%= link gettext("Delete"), to: feed_path(@conn, :delete, feed), method: :delete, class: "btn btn-sm btn-danger feed-entry-delete" %>
+  </div>
 <% end %>
 
 <%= link gettext("New feed"), to: feed_path(@conn, :new), class: "btn btn-primary btn-block" %>

@@ -47,7 +47,7 @@ defmodule Podcasts.Web.Router do
   scope "/", Podcasts.Web do
     pipe_through [:browser, :browser_auth]
 
-    resources "/feeds", FeedController, only: [:index, :show, :new, :create]
+    resources "/feeds", FeedController, only: [:index, :show, :new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.

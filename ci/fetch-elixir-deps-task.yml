@@ -1,0 +1,16 @@
+---
+platform: linux
+
+image_resource:
+  type: docker-image
+  source: { repository: elixir }
+
+inputs:
+  - name: resource-podcasts
+
+outputs:
+  - name: deps
+  - path: resource-podcasts/deps
+
+run:
+  path: resource-podcasts/ci/fetch-elixir-deps-task.sh
