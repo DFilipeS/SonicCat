@@ -27,6 +27,7 @@ mix deps.get'''
     stage('deploy') {
       steps {
         input 'asdasdasd'
+        timeout(unit: 'MINUTES', time: 5)
       }
     }
   }
