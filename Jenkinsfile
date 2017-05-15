@@ -4,7 +4,7 @@ pipeline {
       filename 'docker/ci/Dockerfile'
       args '--link postgres:postgres'
     }
-
+    
   }
   stages {
     stage('build') {
@@ -18,7 +18,9 @@ npm install'''
     }
     stage('test') {
       steps {
-        sh 'mix test'
+        sh '''mix ecto.create
+mix ecto.migrate
+mix test'''
       }
     }
   }
