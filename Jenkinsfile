@@ -9,27 +9,15 @@ pipeline {
   stages {
     stage('build') {
       steps {
-        parallel(
-          "build": {
-            echo 'Hello!'
-            sh '''whoami
-mix local.hex --force
+        sh '''mix local.hex --force
 mix deps.get'''
-            
-          },
-          "test": {
-            echo 'sadsadsad'
-            
-          }
-        )
+        sh '''cd assets
+npm install'''
       }
     }
-    stage('deploy') {
+    stage('test') {
       steps {
-        timeout(unit: 'MINUTES', time: 5) {
-          input 'Do want to proceed with the deploy?'
-        }
-        
+        sh 'mix test'
       }
     }
   }
