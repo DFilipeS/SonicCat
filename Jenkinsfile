@@ -2,7 +2,7 @@ pipeline {
   agent {
     dockerfile {
       filename 'docker/ci/Dockerfile'
-      args '-u root'
+      args '--link postgres:postgres'
     }
 
   }
