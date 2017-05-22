@@ -28,10 +28,23 @@ defmodule Podcasts.Web.FeedController do
       {:ok, _feed} ->
         conn
         |> put_flash(:info, "Feed added successfully!")
-        |> redirect(to: page_path(conn, :index))
+        |> redirect(to: feed_path(conn, :index))
       {:error, changeset} ->
         render(conn, "new.html", changeset: changeset)
     end
   end
 
+  def delete(conn, %{"id" => id}) do
+    feed = Repo.get(Feed, id)
+    case Repo.delete(feed) do
+      {:ok, _feed} ->
+        conn
+        |> put_flash(:info, "Feed deleted successfully!")
+        |> redirect(to: feed_path(conn, :index))
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "Something went wrong...")
+        |> redirect(to: feed_path(conn, :index))
+    end
+  end
 end
