@@ -17,10 +17,17 @@ npm install'''
     }
     stage('test') {
       steps {
-        sh '''mix ecto.create
-mix ecto.migrate
+        sh '''MIX_ENV=test mix ecto.create
+MIX_ENV=test mix ecto.migrate
 mix test'''
       }
     }
+  }
+  post {
+    always {
+      junit 'tests_report.xml'
+      
+    }
+    
   }
 }

@@ -1,0 +1,17 @@
+---
+resources:
+- name: resource-podcasts
+  type: git
+  source:
+    uri: https://github.com/DFilipeS/podcasts.git
+
+jobs:
+- name: fetch-dependencies
+  serial: true
+  plan:
+  - get: resource-podcasts
+    trigger: true
+  - task: fetch-elixir-deps
+    file: resource-podcasts/ci/fetch-elixir-deps-task.yml
+  - task: build-node
+    file: resource-podcasts/ci/build-node-task.yml
