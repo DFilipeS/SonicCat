@@ -6,7 +6,7 @@ defmodule Podcasts.Feeds do
   import SweetXml
 
   alias Podcasts.Repo
-  alias Podcasts.Feeds.Feed
+  alias Podcasts.Feeds.{Entry, Feed}
 
   @doc """
   Creates a feed.
@@ -41,5 +41,11 @@ defmodule Podcasts.Feeds do
     feed
     |> cast(attrs, [:name, :image, :author, :description, :user_id, :url])
     |> validate_required([:user_id, :url])
+  end
+
+  def entry_changeset(%Entry{} = entry, attrs) do
+    entry
+    |> cast(attrs, [:title, :url, :date, :feed_id])
+    |> validate_required([:title, :url, :date, :feed_id])
   end
 end

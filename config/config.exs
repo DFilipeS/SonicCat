@@ -33,11 +33,6 @@ config :guardian, Guardian,
   secret_key: "Zc1Tun16EzNSXjr8vEHpJ14znTPD5QwW4uElePqFR0i0lJB9Gy7YcRnz1r7LByCR",
   serializer: Podcasts.Web.Auth.GuardianSerializer
 
-config :junit_formatter,
-  report_file: "tests_report.xml",
-  report_dir: ".",
-  print_report_file: true
-
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"

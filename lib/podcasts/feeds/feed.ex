@@ -10,6 +10,7 @@ defmodule Podcasts.Feeds.Feed do
     field :description, :string
     field :url, :string
     belongs_to :user, Podcasts.Accounts.User, foreign_key: :user_id
+    has_many :entries, Podcasts.Feeds.Entry
 
     timestamps()
   end

@@ -9,6 +9,11 @@ config :podcasts, Podcasts.Web.Endpoint,
 # Print only warnings and errors during test
 config :logger, level: :warn
 
+config :junit_formatter,
+  report_file: "tests_report.xml",
+  report_dir: ".",
+  print_report_file: true
+
 # Configure your database
 config :podcasts, Podcasts.Repo,
   adapter: Ecto.Adapters.Postgres,
