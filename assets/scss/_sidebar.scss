@@ -1,0 +1,58 @@
+div.wrapper {
+  display: flex;
+  min-height: 100vh;
+
+  div.sidebar {
+    background-color: $sidebar-color;
+    color: #FFFFFF;
+    padding: 62px 0px;
+    min-width: 215px;
+    width: 215px;
+    z-index: 1;
+
+    h1 {
+      font-size: 20px;
+      font-weight: bold;
+      padding-left: 32px;
+      padding-right: 32px;
+      text-transform: uppercase;
+    }
+
+    ul {
+      font-size: 20px;
+      list-style: none;
+      padding: 0;
+
+      li {
+        padding: 7px 32px;
+
+        &.active {
+          border-left: 5px solid $sidebar-active-color;
+          padding-left: 28px;
+
+          a {
+            opacity: 1;
+          }
+        }
+
+        a {
+          color: #FFFFFF;
+          opacity: 0.59;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+          &:hover {
+            opacity: 1;
+            text-decoration: none;
+          }
+        }
+      }
+    }
+  }
+
+  div.content {
+    background-color: #FFFFFF;
+    flex-grow: 1;
+    padding: 50px;
+    overflow: auto;
+  }
+}

@@ -29,6 +29,7 @@ module.exports = (env) => {
     entry: {
       app: [
         "bootstrap-loader",
+        "scss/main.scss",
         "js/app.js"
       ]
     },
@@ -101,13 +102,24 @@ module.exports = (env) => {
             fallback: "style-loader",
             use: ["css-loader", "postcss-loader", "stylus-loader"]
           })
+        },
+
+        {
+          test: /\.scss$/,
+          use: [{
+              loader: "style-loader" // creates style nodes from JS strings
+          }, {
+              loader: "css-loader" // translates CSS into CommonJS
+          }, {
+              loader: "sass-loader" // compiles Sass to CSS
+          }]
         }
       ]
     },
 
     resolve: {
       modules: ["node_modules", __dirname],
-      extensions: [".js", ".json", ".jsx", ".css", ".styl"]
+      extensions: [".js", ".json", ".jsx", ".css", ".scss", ".styl"]
     },
 
     plugins: isDev ? [

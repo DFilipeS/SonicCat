@@ -1,0 +1,48 @@
+.navbar {
+  background-color: #ffffff;
+  box-shadow: 0 2px 4px 0 rgba(200, 200, 200, 0.5);
+  height: 82px;
+  padding-right: 32px;
+  padding-left: 0px;
+
+  .navbar-brand {
+    color: #393939;
+    font-size: 25px;
+    font-weight: bold;
+    margin-right: 0px;
+    padding-left: 32px;
+    text-transform: uppercase;
+    min-width: 215px !important;
+  }
+
+  ul {
+    li {
+      font-size: 20px;;
+      font-weight: bold;
+
+      a.nav-link {
+        color: #393939;
+
+        img {
+          border-radius: 100px;
+          margin-right: 20px;
+          height: 50px;
+          width: 50px;
+        }
+      }
+
+      a.dropdown-toggle::after {
+        margin-left: 15px;
+      }
+    }
+  }
+
+  input {
+    border-radius: 100px;
+    border: solid 1px #cccccc;
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 14px;
+    height: 35px;
+    width: 350px !important;
+  }
+}
