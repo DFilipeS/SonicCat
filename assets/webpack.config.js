@@ -92,7 +92,7 @@ module.exports = (env) => {
 
         {
           test: /\.(css|styl)$/,
-          exclude: /node_modules/,
+          // exclude: /node_modules/,
           use: isDev ? [
             "style-loader",
             "css-loader",

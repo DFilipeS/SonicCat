@@ -1,6 +1,6 @@
 div.wrapper {
   display: flex;
-  min-height: 100vh;
+  // min-height: 100vh;
 
   div.sidebar {
     background-color: $sidebar-color;
@@ -52,7 +52,7 @@ div.wrapper {
   div.content {
     background-color: #FFFFFF;
     flex-grow: 1;
-    padding: 50px;
+    padding: 45px 76px;
     overflow: auto;
   }
 }

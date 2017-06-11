@@ -1,0 +1,147 @@
+.player-wrapper {
+  bottom: 0;
+  left: 0;
+  padding-left: 215px;
+  position: fixed;
+  width: 100%;
+  z-index: 1;
+
+  .player {
+    opacity: 0.97;
+    background-color: #f7f7f8;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.13);
+    display: flex;
+    justify-content: space-between;
+    height: 96px;
+    align-items: center;
+
+    .player-info {
+      display: inline-block;
+      vertical-align: middle;
+      height: 100%;
+      width: 650px;
+
+      .player-info-image {
+        display: inline-block;
+        height: 100%;
+      }
+
+      .player-info-text {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 20px;
+        width: 180px;
+
+        .track-title {
+          font-weight: 600;
+          color: #393939;
+          font-size: 14px;
+          line-height: 18px;
+          margin-bottom: 5px;
+        }
+
+        .feed-name {
+          font-weight: 600;
+          color: #a2a3a7;
+          font-size: 14px;
+          line-height: 18px;
+        }
+      }
+    }
+
+    .player-controls {
+      padding-right: 40px;
+      width: 100%;
+
+      input {
+        width: 100%;
+      }
+
+      // RANGE SLIDER
+
+      .rangeslider {
+        background-color: #d8d8d8;
+        border-radius: 100px;
+        box-shadow: none;
+        height: 5px;
+        margin: 10px 0px;
+
+        .rangeslider__fill {
+          background-color: #2979fe;
+          box-shadow: none;
+        }
+
+        .rangeslider__handle {
+          border: none;
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+          height: 15px;
+          width: 15px;
+          top: -5px;
+
+          &::after {
+            display: none;
+          }
+
+          .rangeslider__tooltip {
+            left: -13px;
+            font-size: 12px;
+            background-color: #000000;
+
+            &::after {
+              border-top-color: #000000;
+            }
+          }
+        }
+      }
+
+      .player-controls-buttons {
+        text-align: center;
+      }
+
+      .player-controls-total-time {
+        float: right;
+      }
+    }
+
+    .player-volume {
+      margin-right: 95px;
+
+      .rangeslider {
+        width: 100px;
+        background-color: #d8d8d8;
+        border-radius: 100px;
+        box-shadow: none;
+        height: 5px;
+        margin: 10px 0px;
+
+        .rangeslider__fill {
+          background-color: #a5a5a5;
+          box-shadow: none;
+        }
+
+        .rangeslider__handle {
+          border: none;
+          box-shadow: none;
+          background-color: #666666;
+          height: 5px;
+          width: 15px;
+          top: 0px;
+
+          &::after {
+            display: none;
+          }
+
+          .rangeslider__tooltip {
+            left: -13px;
+            font-size: 12px;
+            background-color: #000000;
+
+            &::after {
+              border-top-color: #000000;
+            }
+          }
+        }
+      }
+    }
+  }
+}

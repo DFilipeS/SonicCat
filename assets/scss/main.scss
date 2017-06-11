@@ -3,7 +3,15 @@
 @import "_buttons";
 @import "_navbar";
 @import "_sidebar";
+@import "_cards";
+@import "_player";
 
 body {
   font-family: 'Nunito Sans', sans-serif;
+  color: #393939;
+}
+
+h1 {
+  font-size: 50px;
+  font-weight: bold;
 }
