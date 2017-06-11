@@ -38,6 +38,8 @@ defmodule Podcasts.Web.Endpoint do
     key: "_podcasts_key",
     signing_salt: "+lUyndMG"
 
+  plug CORSPlug
+
   plug Podcasts.Web.Router
 
   @doc """

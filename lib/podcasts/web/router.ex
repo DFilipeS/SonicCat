@@ -34,7 +34,7 @@ defmodule Podcasts.Web.Router do
   scope "/", Podcasts.Web do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
+    get "/*path", PageController, :index
     post "/podcast", PageController, :podcast_information
 
     get "/login", AuthController, :new
@@ -53,6 +53,8 @@ defmodule Podcasts.Web.Router do
   # Other scopes may use custom stacks.
   scope "/api", Podcasts.Web do
     pipe_through :api
+
+    post "/login", AuthController, :login
 
     post "/podcast", PageController, :podcast_information_api
     get "/feeds/:id", FeedApiController, :show

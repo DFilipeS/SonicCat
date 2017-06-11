@@ -41,7 +41,8 @@ defmodule Podcasts.Mixfile do
      {:comeonin, "~> 3.0"},
      {:sweet_xml, "~> 0.6"},
      {:timex, "~> 3.1"},
-     {:junit_formatter, "~> 1.3"}]
+     {:junit_formatter, "~> 1.3"},
+     {:cors_plug, "~> 1.2"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
