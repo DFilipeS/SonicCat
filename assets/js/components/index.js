@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions/auth';
+import * as feedsActions from '../actions/feeds';
 import NavbarComponent from './navbar';
 import PlayerComponent from './player';
+import FeedsComponent from './feeds';
 
 class Index extends Component {
 
@@ -24,54 +27,9 @@ class Index extends Component {
             </ul>
           </div>
           <div className="content">
-            <h1 className="mb-4">All</h1>
-              <div className="row">
-                <div className="col-3">
-                  <div className="card feeds-list">
-                    <img className="card-img-top" src="http://www.tsf.pt/podcast/governosombra.jpg" alt="Card image cap" />
-                    <div className="card-block">
-                      <h4 className="card-title">Mixórdia de temáticas, Série Gomes</h4>
-                      <p className="card-text">Ricardo Araújo Pereira</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-3">
-                  <div className="card feeds-list">
-                    <img className="card-img-top" src="http://www.tsf.pt/podcast/governosombra.jpg" alt="Card image cap" />
-                    <div className="card-block">
-                      <h4 className="card-title">Mixórdia de temáticas, Série Gomes</h4>
-                      <p className="card-text">Ricardo Araújo Pereira</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-3">
-                  <div className="card feeds-list">
-                    <img className="card-img-top" src="http://www.tsf.pt/podcast/governosombra.jpg" alt="Card image cap" />
-                    <div className="card-block">
-                      <h4 className="card-title">Mixórdia de temáticas, Série Gomes</h4>
-                      <p className="card-text">Ricardo Araújo Pereira</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-3">
-                  <div className="card feeds-list">
-                    <img className="card-img-top" src="http://www.tsf.pt/podcast/governosombra.jpg" alt="Card image cap" />
-                    <div className="card-block">
-                      <h4 className="card-title">Mixórdia de temáticas, Série Gomes</h4>
-                      <p className="card-text">Ricardo Araújo Pereira</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="col-3">
-                  <div className="card feeds-list">
-                    <img className="card-img-top" src="http://www.tsf.pt/podcast/governosombra.jpg" alt="Card image cap" />
-                    <div className="card-block">
-                      <h4 className="card-title">Mixórdia de temáticas, Série Gomes</h4>
-                      <p className="card-text">Ricardo Araújo Pereira</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+            <Switch>
+              <Route path="/" component={FeedsComponent}/>
+            </Switch>
             <PlayerComponent />
           </div>
         </div>
@@ -80,4 +38,4 @@ class Index extends Component {
   }
 }
 
-export default connect(null, actions)(Index);
+export default Index;

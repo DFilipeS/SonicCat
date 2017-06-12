@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>Group 10</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Tracks@2" transform="translate(-1219.000000, -975.000000)" fill="#393939">
+            <g id="Group-10" transform="translate(1219.000000, 975.000000)">
+                <path d="M11,17.539 L11,15.476 C13.891,14.615 16,11.939 16,8.769 C16,5.6 13.891,2.924 11,2.063 L11,0 C15.007,0.911 18,4.487 18,8.769 C18,13.052 15.007,16.629 11,17.539 L11,17.539 Z M13.5,8.769 C13.5,10.535 12.48,12.059 11,12.797 L11,4.742 C12.48,5.48 13.5,7.004 13.5,8.769 L13.5,8.769 Z M0,11.769 L0,5.769 L4,5.769 L9,0.769 L9,16.769 L4,11.769 L0,11.769 Z" id="ic_sound"></path>
+            </g>
+        </g>
+    </g>
+</svg>

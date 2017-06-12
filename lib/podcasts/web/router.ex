@@ -31,6 +31,17 @@ defmodule Podcasts.Web.Router do
     plug :accepts, ["json"]
   end
 
+  # Other scopes may use custom stacks.
+  scope "/api", Podcasts.Web do
+    pipe_through :api
+
+    post "/login", AuthController, :login
+
+    post "/podcast", PageController, :podcast_information_api
+    get "/feeds", FeedApiController, :index
+    get "/feeds/:id", FeedApiController, :show
+  end
+
   scope "/", Podcasts.Web do
     pipe_through :browser # Use the default browser stack
 
@@ -48,15 +59,5 @@ defmodule Podcasts.Web.Router do
     pipe_through [:browser, :browser_auth]
 
     resources "/feeds", FeedController, only: [:index, :show, :new, :create, :delete]
-  end
-
-  # Other scopes may use custom stacks.
-  scope "/api", Podcasts.Web do
-    pipe_through :api
-
-    post "/login", AuthController, :login
-
-    post "/podcast", PageController, :podcast_information_api
-    get "/feeds/:id", FeedApiController, :show
   end
 end

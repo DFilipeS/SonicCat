@@ -2,7 +2,7 @@ defmodule Podcasts.Feeds.Feed do
   use Ecto.Schema
 
   @timestamps_opts [usec: false] # Disables microsecond precision
-
+  @derive {Poison.Encoder, only: [:id, :name, :image, :author, :description, :url]}
   schema "feeds_feeds" do
     field :name, :string
     field :image, :string

@@ -52,6 +52,9 @@
     .player-controls {
       padding-right: 40px;
       width: 100%;
+      font-size: 14px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-weight: 600;
 
       input {
         width: 100%;
@@ -64,7 +67,7 @@
         border-radius: 100px;
         box-shadow: none;
         height: 5px;
-        margin: 10px 0px;
+        margin: 5px 0px;
 
         .rangeslider__fill {
           background-color: #2979fe;
@@ -96,6 +99,12 @@
 
       .player-controls-buttons {
         text-align: center;
+        margin-bottom: 15px;
+        margin-top: 15px;
+
+        img {
+          margin: 0 15px;
+        }
       }
 
       .player-controls-total-time {
@@ -104,7 +113,12 @@
     }
 
     .player-volume {
+      display: flex;
       margin-right: 95px;
+
+      img {
+        margin-right: 15px;
+      }
 
       .rangeslider {
         width: 100px;

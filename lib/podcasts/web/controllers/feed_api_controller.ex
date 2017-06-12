@@ -6,6 +6,11 @@ defmodule Podcasts.Web.FeedApiController do
   alias Podcasts.Repo
   alias Podcasts.Feeds.Feed
 
+  def index(conn, _args) do
+    feeds = Repo.all(Feed)
+    json conn, %{feeds: feeds}
+  end
+
   def show(conn, %{"id" => id}) do
     feed = Repo.get(Feed, id)
     {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(feed.url)

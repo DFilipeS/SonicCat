@@ -30,11 +30,11 @@ class Player extends Component {
           </div>
           <div className="player-controls">
             <div className="player-controls-buttons">
-              <span>Previous</span>
-              <span>Back 15</span>
-              <span>Play</span>
-              <span>Forward 15</span>
-              <span>Next</span>
+              <img src="/images/last.svg" alt=""/>
+              <img src="/images/back.svg" alt=""/>
+              <img src="/images/play.svg" alt=""/>
+              <img src="/images/forward.svg" alt=""/>
+              <img src="/images/next.svg" alt=""/>
             </div>
             <Slider
               value={volume}
@@ -44,6 +44,7 @@ class Player extends Component {
             <span className="player-controls-total-time">99:99</span>
           </div>
           <div className="player-volume">
+            <img src="/images/audio.svg" alt=""/>
             <Slider
               value={volume}
               tooltip={false}
