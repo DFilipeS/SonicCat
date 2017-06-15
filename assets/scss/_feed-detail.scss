@@ -1,0 +1,36 @@
+.feed-detail {
+  .feed-header {
+    display: flex;
+    margin-bottom: 70px;
+
+    .feed-header-image {
+      img {
+        box-shadow: 0 2px 4px 0 rgba(156, 156, 156, 0.5);
+        height: 172px;
+        width: 172px;
+      }
+    }
+
+    .feed-header-text {
+      color: #393939;
+      margin: 0px 30px;
+
+      h1 {
+        font-size: 35px;
+        color: #393939;
+        margin-bottom: 15px;
+      }
+
+      h2 {
+        font-size: 18px;
+        color: #393939;
+        margin-bottom: 12px;
+      }
+
+      h3 {
+        font-size: 20px;
+        color: #a6a6a6;
+      }
+    }
+  }
+}

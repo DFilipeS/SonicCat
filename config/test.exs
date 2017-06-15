@@ -15,5 +15,5 @@ config :podcasts, Podcasts.Repo,
   username: "postgres",
   password: "postgres",
   database: "podcasts_test",
-  hostname: "postgres",
+  hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

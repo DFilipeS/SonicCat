@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import * as feedsActions from '../actions/feeds';
 
@@ -14,13 +15,15 @@ class Feeds extends Component {
       return this.props.feeds.map((feed) => {
         return (
           <div className="col-3" key={feed.id}>
-            <div className="card feeds-list">
-              <img className="card-img-top" src={feed.image} alt="Card image cap" />
-              <div className="card-block">
-                <h4 className="card-title">{feed.name}</h4>
-                <p className="card-text">{feed.author}</p>
+            <Link to={`/feeds/${feed.id}`}>
+              <div className="card feeds-list">
+                <img className="card-img-top" src={feed.image} alt="Card image cap" />
+                <div className="card-block">
+                  <h4 className="card-title">{feed.name}</h4>
+                  <p className="card-text">{feed.author}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         );
       });
@@ -30,6 +33,9 @@ class Feeds extends Component {
   render() {
     return (
       <div>
+        <div className="float-right">
+          <button className="btn btn-primary">New Feed</button>
+        </div>
         <h1 className="mb-4">All</h1>
         <div className="row">
           {this.renderFeeds()}

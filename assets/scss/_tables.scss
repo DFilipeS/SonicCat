@@ -1,0 +1,30 @@
+table {
+  thead {
+    th {
+      border: none !important;
+      border-bottom: 1px solid #393939 !important;
+      color: #a6a6a6;
+      font-weight: bold;
+      font-size: 18px;
+      text-transform: uppercase;
+    }
+  }
+
+  tbody {
+
+    .active {
+      background-color: #f6f9ff;
+
+      td {
+        color: #2979fe;
+        font-weight: 600;
+      }
+    }
+
+    td {
+      font-size: 18px;
+      color: #393939;
+      padding: 25px 0px !important;
+    }
+  }
+}
