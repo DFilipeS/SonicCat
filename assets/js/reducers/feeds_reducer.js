@@ -1,4 +1,4 @@
-import { GET_FEEDS, GET_FEED, PLAY_ENTRY } from '../actions/types';
+import { GET_FEEDS, GET_FEED } from '../actions/types';
 
 export default function(state = {}, action) {
   switch(action.type) {
@@ -6,8 +6,6 @@ export default function(state = {}, action) {
       return { ...state, feeds: action.payload.feeds };
     case GET_FEED:
       return { ...state, feed: action.payload.feed };
-    case PLAY_ENTRY:
-      return { ...state, currentlyPlaying: action.payload };
     default:
       return state;
   }

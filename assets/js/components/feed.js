@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
+import { bindActionCreators } from 'redux';
 
 import * as feedsActions from '../actions/feeds';
+import * as playerActions from '../actions/player';
 
 class Feed extends Component {
 
   componentWillMount() {
     const id = this.props.match.params.id;
-    this.props.getFeed(id);
+    this.props.actions.feedsActions.getFeed(id);
   }
 
   playEntry = (feed, entry) => {
-    this.props.playEntry(feed, entry);
+    this.props.actions.playerActions.playEntry(feed, entry);
   }
 
   render() {
@@ -21,7 +23,7 @@ class Feed extends Component {
     const tableBody = this.props.feed.entries.map((entry, index) => {
       let rowClassNames = "";
 
-      if (this.props.currentlyPlaying && this.props.currentlyPlaying.entry.url === entry.url) {
+      if (this.props.currentlyPlaying && this.props.currentlyPlaying.url === entry.url) {
         rowClassNames = "active";
       }
 
@@ -30,10 +32,18 @@ class Feed extends Component {
           <td>{entry.title}</td>
           <td className="text-nowrap">{moment(entry.date).format('YYYY-MM-DD HH:MM')}</td>
           {
-            this.props.currentlyPlaying && this.props.currentlyPlaying.entry.url === entry.url ?
-              <td><a href="#" onClick={(e) => { e.preventDefault(); this.playEntry(this.props.feed, entry); }} className="ml-5">Pause</a></td>
+            this.props.currentlyPlaying && this.props.currentlyPlaying.url === entry.url ?
+              <td>
+                <a href="#" onClick={(e) => { e.preventDefault(); this.playEntry(this.props.feed, entry); }} className="ml-5">
+                  <img src="/images/pause.svg" />
+                </a>
+              </td>
               :
-              <td><a href="#" onClick={(e) => { e.preventDefault(); this.playEntry(this.props.feed, entry); }} className="ml-5">Play</a></td>
+              <td>
+                <a href="#" onClick={(e) => { e.preventDefault(); this.playEntry(this.props.feed, entry); }} className="ml-5">
+                  <img src="/images/play.svg" />
+                </a>
+              </td>
           }
         </tr>
       );
@@ -74,8 +84,17 @@ class Feed extends Component {
 function mapStateToProps(state) {
   return {
     feed: state.feeds.feed,
-    currentlyPlaying: state.feeds.currentlyPlaying
+    currentlyPlaying: state.player.playlist ? state.player.playlist[state.player.currentlyPlaying] : null
   };
 }
 
-export default connect(mapStateToProps, feedsActions)(Feed);
+function mapDispatchToProps(dispatch) {
+  return {
+    actions: {
+      feedsActions: bindActionCreators(feedsActions, dispatch),
+      playerActions: bindActionCreators(playerActions, dispatch)
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Feed);

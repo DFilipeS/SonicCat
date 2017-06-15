@@ -24,21 +24,19 @@ class Player extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps', nextProps);
 
-    if (!this.props.data || nextProps.data.entry.url !== this.props.data.entry.url) {
-      if (this.player) {
-        this.player.stop();
-      }
-
-      this.setState({
-        feed: null,
-        state: 'stopped',
-        currentlyPlaying: null,
-        currentEntry: null,
-        currentTime: 0,
-        duration: 0,
-        volume: 1.0
-      }, () => { this.playEntry(); });
+    if (this.player) {
+      this.player.stop();
     }
+
+    this.setState({
+      feed: null,
+      state: 'stopped',
+      currentlyPlaying: null,
+      currentEntry: null,
+      currentTime: 0,
+      duration: 0,
+      volume: 1.0
+    }, () => { this.playEntry(); });
   }
 
   handleOnChange = (value) => {
@@ -48,7 +46,7 @@ class Player extends Component {
   }
 
   playEntry = () => {
-    const entry = this.props.data.entry;
+    const entry = this.props.playlist[this.props.currentlyPlaying];
 
     if (this.player) {
       this.player.stop().unload();
@@ -95,6 +93,26 @@ class Player extends Component {
     this.setState({ state: 'paused' });
   }
 
+  goBack15 = () => {
+    if (this.state.currentTime >= 15) {
+      this.setState({ currentTime: this.state.currentTime - 15 });
+      this.player.seek(this.state.currentTime - 15);
+    } else {
+      this.setState({ currentTime: 0 });
+      this.player.seek(0);
+    }
+  }
+
+  goForward15 = () => {
+    if (this.state.currentTime <= this.state.duration - 15) {
+      this.setState({ currentTime: this.state.currentTime + 15 });
+      this.player.seek(this.state.currentTime + 15);
+    } else {
+      this.setState({ currentTime: this.state.duration });
+      this.player.seek(this.state.duration);
+    }
+  }
+
   onSeek = (value) => {
     this.setState({ currentTime: value });
     this.player.seek(value);
@@ -107,34 +125,34 @@ class Player extends Component {
 
   renderControls() {
     if (this.state.state === "playing") {
-      return <img src="/images/pause.svg" alt="" onClick={this.pause}/>;
+      return <img src="/images/pause.svg" alt="Pause" onClick={this.pause}/>;
     } else if (this.state.state === "paused") {
-      return <img src="/images/play.svg" alt="" onClick={this.resume}/>;
+      return <img src="/images/play.svg" alt="Play" onClick={this.resume}/>;
     }
 
     return <img src="/images/play.svg" alt="" onClick={this.playEntry}/>;
   }
 
   render() {
-    if (!this.props.data || this.state.state === 'stopped') return <div>Loading...</div>;
+    if (!this.props.playlist || this.state.state === 'stopped') return <div>Loading...</div>;
 
     let { volume } = this.state;
     return (
       <div className="player-wrapper">
         <div className="player">
           <div className="player-info">
-            <img src={this.props.data.feed.image} alt="" className="player-info-image"/>
+            <img src={this.props.playlist[this.props.currentlyPlaying].feed.image} alt="" className="player-info-image"/>
             <div className="player-info-text">
-              <div className="track-title">{this.props.data.entry.title}</div>
-              <div className="feed-name">{this.props.data.feed.name}</div>
+              <div className="track-title">{this.props.playlist[this.props.currentlyPlaying].title}</div>
+              <div className="feed-name">{this.props.playlist[this.props.currentlyPlaying].feed.name}</div>
             </div>
           </div>
           <div className="player-controls">
             <div className="player-controls-buttons">
               <img src="/images/last.svg" alt=""/>
-              <img src="/images/back.svg" alt=""/>
+              <img src="/images/back.svg" onClick={this.goBack15} alt="Go back 15 seconds"/>
               {this.renderControls()}
-              <img src="/images/forward.svg" alt=""/>
+              <img src="/images/forward.svg" onClick={this.goForward15} alt="Go forward 15 seconds"/>
               <img src="/images/next.svg" alt=""/>
             </div>
             <Slider
@@ -170,7 +188,8 @@ class Player extends Component {
 
 function mapStateToProps(state) {
   return {
-    data: state.feeds.currentlyPlaying
+    currentlyPlaying: state.player.currentlyPlaying,
+    playlist: state.player.playlist
   };
 }
 
