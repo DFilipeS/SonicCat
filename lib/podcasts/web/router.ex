@@ -27,6 +27,12 @@ defmodule Podcasts.Web.Router do
     plug Guardian.Plug.LoadResource
   end
 
+  pipeline :api_auth do
+    plug Guardian.Plug.VerifyHeader, realm: "User"
+    plug Guardian.Plug.EnsureAuthenticated, handler: Podcasts.Web.Auth.Token
+    plug Guardian.Plug.LoadResource
+  end
+
   pipeline :api do
     plug :accepts, ["json"]
   end
@@ -36,9 +42,16 @@ defmodule Podcasts.Web.Router do
     pipe_through :api
 
     post "/login", AuthController, :login
+  end
+
+  scope "/api", Podcasts.Web do
+    pipe_through [:api, :api_auth]
+
+    post "/login", AuthController, :login
 
     post "/podcast", PageController, :podcast_information_api
     get "/feeds", FeedApiController, :index
+    post "/feeds", FeedApiController, :create
     get "/feeds/:id", FeedApiController, :show
   end
 

@@ -4,4 +4,6 @@ export const AUTH_ERROR = 'auth_error';
 
 export const GET_FEEDS = 'get_feeds';
 export const GET_FEED = 'get_feed';
+export const ADD_FEED = 'add_feed';
+
 export const PLAY_ENTRY = 'play_entry';

@@ -1,0 +1,64 @@
+.search-results {
+  position: absolute;
+  top: 100px;
+  left: 230px;
+
+  &:focus {
+    outline: none;
+  }
+
+  .search-results-box {
+    background-color: #ffffff;
+    border: 1px solid #a6a6a6;
+    border-radius: 5px;
+    width: 375px;
+    box-shadow: 0 2px 4px 0 rgba(156, 156, 156, 0.5);
+    max-height: 350px;
+    overflow: auto;
+
+    .search-result {
+      display: flex;
+      flex-grow: 1;
+      align-items: center;
+      border-bottom: 1px solid #cccccc;
+      cursor: pointer;
+
+      &:first-child {
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+      }
+
+      &:last-child {
+        border-bottom: none;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+      }
+
+      &:hover {
+        background-color: #eeeeee;
+      }
+
+      img {
+        height: 90px;
+        width: 90px;
+      }
+
+      .search-result-text {
+        display: inline-block;
+        padding: 0px 10px;
+
+        .search-result-title {
+          font-size: 13px;
+        }
+
+        .search-result-author {
+          font-size: 13px;
+          color: #a6a6a6;
+          margin-bottom: 0px;
+        }
+      }
+
+
+    }
+  }
+}

@@ -1,29 +1,36 @@
-.card {
-  &.feeds-list {
-    background-color: transparent;
-    border: none;
-    margin-bottom: 25px;
+.card-link {
 
-    .card-img-top {
-      width: 100%;
-    }
+  &:hover {
+    text-decoration: none;
+  }
 
-    .card-block {
-      padding: 0;
+  .card {
+    &.feeds-list {
+      background-color: transparent;
+      border: none;
+      margin-bottom: 25px;
 
-      .card-title {
-        color: #393939;
-        font-size: 18px;
-        font-weight: 600;
-        margin-top: 10px;
-        margin-bottom: 5px;
+      .card-img-top {
+        width: 100%;
       }
 
-      .card-text {
-        color: #2f313a;
-        font-size: 18px;
-        font-weight: 600;
-        opacity: 0.45;
+      .card-block {
+        padding: 0;
+
+        .card-title {
+          color: #393939;
+          font-size: 18px;
+          font-weight: 600;
+          margin-top: 10px;
+          margin-bottom: 5px;
+        }
+
+        .card-text {
+          color: #2f313a;
+          font-size: 18px;
+          font-weight: 600;
+          opacity: 0.45;
+        }
       }
     }
   }

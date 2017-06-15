@@ -11,6 +11,11 @@ defmodule Podcasts.Web.FeedApiController do
     json conn, %{feeds: feeds}
   end
 
+  def create(conn, params) do
+    {:ok, feed} = Podcasts.Feeds.create_feed(Map.put(params, "user_id", Podcasts.Web.ViewHelpers.current_user(conn).id))
+    json conn, %{feed: feed}
+  end
+
   def show(conn, %{"id" => id}) do
     feed = Repo.get(Feed, id)
     {:ok, %HTTPoison.Response{body: body}} = HTTPoison.get(feed.url)

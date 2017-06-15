@@ -15,7 +15,7 @@ class Feeds extends Component {
       return this.props.feeds.map((feed) => {
         return (
           <div className="col-3" key={feed.id}>
-            <Link to={`/feeds/${feed.id}`}>
+            <Link to={`/feeds/${feed.id}`} className="card-link">
               <div className="card feeds-list">
                 <img className="card-img-top" src={feed.image} alt="Card image cap" />
                 <div className="card-block">

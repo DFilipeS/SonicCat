@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import * as actions from '../actions/auth';
+import Search from './search';
 
 class Navbar extends Component {
 
@@ -18,9 +19,7 @@ class Navbar extends Component {
         <a className="navbar-brand" href="#">Podcasts</a>
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          <form className="form-inline my-2 ml-4 my-lg-0 mr-auto">
-            <input className="form-control mr-sm-2" type="text" placeholder="Search" />
-          </form>
+          <Search />
           <ul className="navbar-nav">
             <li className="nav-item dropdown">
               <a className="nav-link dropdown-toggle" href="#" data-toggle="dropdown">

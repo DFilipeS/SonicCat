@@ -8,6 +8,15 @@ import * as playerActions from '../actions/player';
 
 class Feed extends Component {
 
+  componentWillUpdate(nextProps, nextState) {
+    const id = this.props.match.params.id;
+    const nextPropsId = nextProps.match.params.id;
+
+    if (id !== nextPropsId) {
+      this.props.actions.feedsActions.getFeed(nextPropsId);
+    }
+  }
+
   componentWillMount() {
     const id = this.props.match.params.id;
     this.props.actions.feedsActions.getFeed(id);

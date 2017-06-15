@@ -3,13 +3,13 @@ defmodule Podcasts.Web.Auth.Token do
 
   def unauthenticated(conn, _params) do
     conn
-    |> put_flash(:info, "You must be signed in to access this page.")
-    |> redirect(to: auth_path(conn, :new))
+    |> put_status(401)
+    |> json %{error: "Unauthenticated request.", code: 401}
   end
 
   def unauthorized(conn, _params) do
     conn
-    |> put_flash(:error, "You must be signed in to access this page")
-    |> redirect(to: auth_path(conn, :new))
+    |> put_status(403)
+    |> json %{error: "Unauthorized request.", code: 403}
   end
 end
