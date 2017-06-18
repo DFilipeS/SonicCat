@@ -40,4 +40,10 @@ defmodule SonicCat.Web.Router do
     post "/login", AuthController, :login
     post "/register", AuthController, :register
   end
+
+  scope "/api", SonicCat.Web do
+    pipe_through [:api, :api_auth]
+
+    resources "/feeds", FeedController, except: [:new, :edit]
+  end
 end

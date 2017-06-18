@@ -39,6 +39,7 @@ defmodule SonicCat.Web do
       import SonicCat.Web.Router.Helpers
       import SonicCat.Web.ErrorHelpers
       import SonicCat.Web.Gettext
+      import SonicCat.Web.ViewHelpers
     end
   end
 
