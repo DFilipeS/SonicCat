@@ -14,9 +14,8 @@ defmodule SonicCat.Web.FeedController do
     render(conn, "index.json", feeds: feeds)
   end
 
-  def create(conn, %{"feed" => feed_params}) do
-    feed_params = Map.put(feed_params, "user_id", current_user(conn).id)
-
+  def create(conn, %{"url" => url}) do
+    feed_params = %{"url" => url, "user_id" => current_user(conn).id}
     with {:ok, %Feed{} = feed} <- Feeds.create_feed(feed_params) do
       feed = Repo.preload(feed, :user)
 
@@ -30,14 +29,6 @@ defmodule SonicCat.Web.FeedController do
   def show(conn, %{"id" => id}) do
     feed = Feeds.get_feed!(id)
     render(conn, "show.json", feed: feed)
-  end
-
-  def update(conn, %{"id" => id, "feed" => feed_params}) do
-    feed = Feeds.get_feed!(id)
-
-    with {:ok, %Feed{} = feed} <- Feeds.update_feed(feed, feed_params) do
-      render(conn, "show.json", feed: feed)
-    end
   end
 
   def delete(conn, %{"id" => id}) do

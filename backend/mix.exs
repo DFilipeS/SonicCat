@@ -38,7 +38,9 @@ defmodule SonicCat.Mixfile do
      {:cowboy, "~> 1.0"},
      {:guardian, "~> 0.14"},
      {:comeonin, "~> 3.0"},
-     {:ex_machina, "~> 2.0"}]
+     {:ex_machina, "~> 2.0"},
+     {:httpoison, "~> 0.11.1"},
+     {:sweet_xml, "~> 0.6"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.

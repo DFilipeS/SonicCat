@@ -17,4 +17,10 @@ defmodule SonicCat.Web.FallbackController do
     |> put_status(:not_found)
     |> render(SonicCat.Web.ErrorView, :"404")
   end
+
+  def call(conn, {:error, message}) do
+    conn
+    |> put_status(:unprocessable_entity)
+    |> json(%{error: message})
+  end
 end

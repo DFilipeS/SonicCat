@@ -3,12 +3,6 @@ defmodule SonicCat.Web.FeedControllerTest do
 
   import SonicCat.Factory
 
-  alias SonicCat.Feeds.Feed
-
-  @create_attrs %{author: "some author", description: "some description", image: "some image", name: "some name", url: "some url"}
-  @update_attrs %{author: "some updated author", description: "some updated description", image: "some updated image", name: "some updated name", url: "some updated url"}
-  @invalid_attrs %{author: nil, description: nil, image: nil, name: nil, url: nil}
-
   setup %{conn: conn} do
     user = insert(:user)
     {:ok, jwt, full_claims} = Guardian.encode_and_sign(user)
@@ -28,7 +22,7 @@ defmodule SonicCat.Web.FeedControllerTest do
     new_conn =
       conn
       |> put_req_header("authorization", "User #{jwt}")
-      |> post(feed_path(conn, :create), feed: @create_attrs)
+      |> post(feed_path(conn, :create), url: "http://feeds.feedburner.com/rc-as-baladas-de-dr-paixao")
     assert %{"id" => id} = json_response(new_conn, 201)["data"]
 
     new_conn =
@@ -37,11 +31,11 @@ defmodule SonicCat.Web.FeedControllerTest do
       |> get(feed_path(conn, :show, id))
     assert json_response(new_conn, 200)["data"] == %{
       "id" => id,
-      "author" => "some author",
-      "description" => "some description",
-      "image" => "some image",
-      "name" => "some name",
-      "url" => "some url",
+      "author" => "Nuno Markl",
+      "description" => "As Baladas de Dr. Paixão é uma rubrica de amor das Manhãs da Comercial.",
+      "image" => "http://radiocomercial.iol.pt/upload/B/baladas-14001.png",
+      "name" => "Rádio Comercial - As Baladas de Dr Paixão",
+      "url" => "http://feeds.feedburner.com/rc-as-baladas-de-dr-paixao",
       "user" => %{
         "email" => user.email,
         "first_name" => user.first_name,
@@ -55,45 +49,8 @@ defmodule SonicCat.Web.FeedControllerTest do
     conn =
       conn
       |> put_req_header("authorization", "User #{jwt}")
-      |> post(feed_path(conn, :create), feed: @invalid_attrs)
-    assert json_response(conn, 422)["errors"] != %{}
-  end
-
-  test "updates chosen feed and renders feed when data is valid", %{conn: conn, jwt: jwt} do
-    %Feed{id: id} = feed = insert(:feed)
-    new_conn =
-      conn
-      |> put_req_header("authorization", "User #{jwt}")
-      |> put(feed_path(conn, :update, feed), feed: @update_attrs)
-    assert %{"id" => ^id} = json_response(new_conn, 200)["data"]
-
-    new_conn =
-      conn
-      |> put_req_header("authorization", "User #{jwt}")
-      |> get(feed_path(conn, :show, id))
-    assert json_response(new_conn, 200)["data"] == %{
-      "id" => id,
-      "author" => "some updated author",
-      "description" => "some updated description",
-      "image" => "some updated image",
-      "name" => "some updated name",
-      "url" => "some updated url",
-      "user" => %{
-        "email" => feed.user.email,
-        "first_name" => feed.user.first_name,
-        "last_name" => feed.user.last_name,
-        "id" => feed.user.id,
-      }
-    }
-  end
-
-  test "does not update chosen feed and renders errors when data is invalid", %{conn: conn, jwt: jwt} do
-    feed = insert(:feed)
-    conn =
-      conn
-      |> put_req_header("authorization", "User #{jwt}")
-      |> put(feed_path(conn, :update, feed), feed: @invalid_attrs)
-    assert json_response(conn, 422)["errors"] != %{}
+      |> post(feed_path(conn, :create), url: "http://localhost")
+    assert json_response(conn, 422)["error"] == "Invalid URL"
   end
 
   test "deletes chosen feed", %{conn: conn, jwt: jwt} do
